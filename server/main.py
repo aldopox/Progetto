@@ -1,7 +1,8 @@
 import sys
 from flask import Flask, request, Response, render_template
 import logging
-import mariadb
+import mysql.connector
+from mysql.connector import Error
 import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -26,26 +27,26 @@ app = Flask(__name__)
 
 def insert_into_record(cam_id, values):
     try:
-        connection_db = mariadb.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD, db=DB_NAME)
+        connection_db = mysql.connector.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD, db=DB_NAME)
         try:
             cursor = connection_db.cursor()
             values = values.replace("'", "").replace(" ", "")[1:-1]
             #print(cam_id, values)
             cursor.execute(f'INSERT INTO RECORD (CAMERA_ID, DATETIME, ITEMS) '
                            f'VALUES ("{cam_id}", CURRENT_TIMESTAMP, "{values}")')
-        except mariadb.Error as e:
+        except Error as e:
             logging.error("Error while inserting data into RECEIVER_MSG_SAMPLE: " + str(e))
         finally:
             connection_db.commit()
             cursor.close()
             connection_db.close()
-    except mariadb.Error as e:
+    except Error as e:
         logging.error("Error while connecting to DB: " + str(e))
 
 def get_data():
     df = None
     try:
-        connection_db = mariadb.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD, db=DB_NAME)
+        connection_db = mysql.connector.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD, db=DB_NAME)
         try:
             cursor = connection_db.cursor()
             cursor.execute("SELECT * FROM RECORD");
@@ -53,13 +54,13 @@ def get_data():
             result = [{columns[index][0]: column for index, column in enumerate(value)} for value in
                       cursor.fetchall()]
             df = pd.DataFrame(result)
-        except mariadb.Error as e:
+        except Error as e:
             logging.error('Error while querying DB: ' + str(e))
         finally:
             cursor.close()
             connection_db.close()
             return df
-    except mariadb.Error as e:
+    except Error as e:
         logging.error("Error while connecting to DB", e)
 
 

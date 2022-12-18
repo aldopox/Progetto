@@ -1,5 +1,5 @@
 flask
-mariadb
+mysql-connector-python
 pandas
 matplotlib
 seaborn
