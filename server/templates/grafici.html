@@ -1,0 +1,199 @@
+<html>
+	<meta charset="utf-8">
+    <title>Grafici</title>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  background-image: url("../static/hom4.jpg");
+  background-color: #cccccc;
+  background-size: cover;
+  font-family: Arial;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+  border-radius: 8%
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: static;
+  top: 100%;
+  width: auto;
+  padding: 6%;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
+  border-radius: 80%;
+  user-select: none;
+  -webkit-user-select: none;
+    background-color: rgba(252, 250, 250, 0.22);
+}
+
+.prev {
+  object-position: right;
+  border-radius: 15%;
+}
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 15%;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(34, 34, 34, 0.22);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #ffffff;
+  font-size: 12px;
+  padding: 8px 5px;
+  top: 0;
+  font-weight: bolder;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+  position: absolute;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  width: 50%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+</style>
+<body>
+<h1 style="text-align:center; color: white; font-weight: bolder; font-size: 40px">Camera {{CAMERA_ID}}</h1>
+<h2 style="text-align:center; color: white; font-weight: bolder; font-size: 25px">Qui le sue rilevazioni:</h2>
+<center>
+
+
+<table style='table-layout:fixed; width:100%'>
+<tr>
+<td></td>
+<td><img style="width:100%" src="../static/GraficoPerc.svg" alt="Grafico1"></td>
+<td></td>
+</tr>
+<tr>
+    <td Align = right><a class="prev" style="text-align: right"onclick="plusSlides(-1)">&#10094; </a></td>
+    <td><div class="container">
+<!-- Full-width images with number text -->
+        <div class="mySlides">
+        <div class="numbertext">1 / 2</div>
+        <img src="../static/GraficoApparizioni.svg" style="width:100%">
+        </div>
+        <div class="mySlides">
+        <div class="numbertext">2 / 2</div>
+        <img src="../static/GraficoApparizioni2.svg" style="width:100%">
+        </div>
+    </div></td>
+        <td><a class="next" onclick="plusSlides(1)">&#10095;</a></td>
+</tr>
+</table>
+</center>
+<br>
+
+  <!-- Image text -->
+  <div class="caption-container">
+    <p id="caption"></p>
+
+  <!-- Thumbnail images -->
+    <table style='table-layout:fixed; width:100%; background-color: #222222'>
+        <td Align = right>
+            <centre>
+            <div class="row">
+            <div class="column">
+              <img class="demo cursor" src="../static/GraficoApparizioni.svg" style="width:50%;text-align: center; vertical-align: middle" onclick="currentSlide(1)" alt="Temporale">
+            </div>
+            </div>
+            </centre>
+        </td>
+        <td>
+
+                <div class="row">
+                <div class="column">
+                  <img class="demo" src="../static/GraficoApparizioni2.svg" style="width:50%;text-align: center; vertical-align: middle" onclick="currentSlide(2)" alt="Per frame">
+                </div>
+                </div>
+        </td>
+    </table>
+  </div>
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("demo");
+  let captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+</body>
+</html>

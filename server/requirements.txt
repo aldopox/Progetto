@@ -1,0 +1,5 @@
+flask
+mariadb
+pandas
+matplotlib
+seaborn
