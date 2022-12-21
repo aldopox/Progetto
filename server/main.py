@@ -199,8 +199,9 @@ def grafici(cam_id, selected_items):
                 frame_occurrences_dict[e] = 1
             else:
                 frame_occurrences_dict[e] += 1
-        if max(frame_occurrences_dict.values()) > max_occurrence:
-            max_occurrence = max(frame_occurrences_dict.values())
+        if frame_occurrences_dict != {}:
+            if max(frame_occurrences_dict.values()) > max_occurrence:
+                max_occurrence = max(frame_occurrences_dict.values())
     max_occurrence += 1
 
     fig, ax = plt.subplots()
@@ -214,7 +215,7 @@ def grafici(cam_id, selected_items):
 
     df2 = df2.set_index("DATETIME")
     fig, ax = plt.subplots()
-    sns.lineplot(data=df2, ax=ax)
+    #sns.lineplot(data=df2, ax=ax)
     sns.color_palette("Set2")
     ax.set_ylabel('Occurrence')
     ax.set_title('Items appared')
