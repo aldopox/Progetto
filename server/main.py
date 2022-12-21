@@ -213,7 +213,7 @@ def grafici(cam_id, selected_items):
     ax.set(ylim=(0, max_occurrence)) #difficile ci siano più di 3 oggetti uguali nella stessa inquadratura (caso webcam locale)
     plt.savefig('static/GraficoApparizioni.svg')
 
-    x_axis_points = df2.DATETIME.dt.strftime('%m-%d %H:%M:%S').sort_values().unique()
+    x_axis_points = df2.DATETIME.dt.strftime('%M:%S').sort_values().unique()
     df2 = df2.set_index("DATETIME")
     fig, ax = plt.subplots()
     sns.lineplot(data=df2, ax=ax)
