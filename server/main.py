@@ -219,7 +219,7 @@ def grafici(cam_id, selected_items):
     sns.lineplot(data=df2, ax=ax)
     sns.color_palette("Set2")
     ax.set_ylabel('Occurrence')
-    ax.set_xticklabels(labels=x_axis_points, rotation=45, ha='right')
+    plt.xticks([x for x in range(len(x_axis_points))], x_axis_points)
     ax.set_title('Items appared')
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
     ax.set(ylim=(0, max_occurrence))
