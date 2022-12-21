@@ -215,7 +215,7 @@ def grafici(cam_id, selected_items):
 
     df2 = df2.set_index("DATETIME")
     fig, ax = plt.subplots()
-    #sns.lineplot(data=df2, ax=ax)
+    sns.lineplot(data=df2, ax=ax)
     sns.color_palette("Set2")
     ax.set_ylabel('Occurrence')
     ax.set_title('Items appared')
