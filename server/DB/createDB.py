@@ -1,6 +1,6 @@
 import time
-from mariadb import Error
-import mariadb
+import mysql.connector
+from mysql.connector import Error
 import DBinfo
 
 DB_IP = DBinfo.DB_IP
@@ -10,7 +10,7 @@ DB_NAME = DBinfo.DB_NAME
 DROP_DP = True
 
 try:
-    connection = mariadb.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD)
+    connection = mysql.connector.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD)
     try:
         cursor = connection.cursor()
         if DROP_DP:
@@ -28,7 +28,7 @@ try:
         connection.close()
 
     time.sleep(5)
-    connection = mariadb.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD, db=DB_NAME)
+    connection = mysql.connector.connect(host=DB_IP, user=DB_USER, passwd=DB_PASSWD, db=DB_NAME)
     try:
         cursor = connection.cursor()
         cursor.execute('SHOW TABLES;')
@@ -37,10 +37,10 @@ try:
         for t in tables:
             print(t)
     except Error as e:
-        mariadb.error('Error while querying DB: ' + str(e))
+        print('Error while querying DB: ' + str(e))
     finally:
         cursor.close()
         connection.close()
 
 except Error as e:
-    mariadb.error('Error while connecting to DB: ' + str(e))
+    print('Error while connecting to DB: ' + str(e))
