@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:3.7_slim
 
 COPY . ./
 
