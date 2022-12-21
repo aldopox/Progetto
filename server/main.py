@@ -239,4 +239,4 @@ def home(err=False): #aggiungere metodo di visualizzazione dei dati inseriti
 #mix fra dati della fotocamera e dati di home
 
 if __name__ == '__main__':
-    app.run(use_reloader=True, debug=True, port=80)
+    app.run(use_reloader=True, debug=True, port=80, host="0.0.0.0")
